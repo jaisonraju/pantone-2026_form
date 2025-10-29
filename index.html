@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pantone 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Fonts & Bootstrap for professional styling -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;400&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background: linear-gradient(135deg, #222942 0%, #4a2969 70%, #f84646 100%);
+      font-family: "Montserrat", sans-serif;
+      color: #e4e6ee;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .container-elite {
+      background: rgba(34, 41, 66, 0.93);
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px rgba(49, 54, 68, 0.3);
+      padding: 2.5rem;
+      margin-top: 3rem;
+      max-width: 520px;
+    }
+    .main-heading {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #f84646 20%, #6ce1e6 80%);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+      text-align: center;
+      text-shadow: 0 4px 24px #22294244;
+    }
+    .desc {
+      font-size: 1.1rem;
+      color: #c3cad4;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    label {
+      font-weight: 500;
+      color: #97cdf5;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .form-control,
+    .form-select,
+    textarea {
+      background-color: #fff !important;
+      color: #222942 !important;
+      border-radius: 0.6rem !important;
+      border: 1px solid #585b77;
+      font-size: 1rem;
+      box-shadow: none;
+      margin-bottom: 0.5rem;
+    }
+    .form-control:focus,
+    .form-select:focus,
+    textarea:focus {
+      border: 1.5px solid #f84646;
+      box-shadow: 0 0 0 2px #f8464622;
+      background-color: #fff !important;
+      color: #222942 !important;
+    }
+    .color-row {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .color-row input[type="color"] {
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      margin-right: 1rem;
+      box-shadow: 0 2px 12px #f8464644;
+    }
+    .color-row input[type="text"] {
+      max-width: 100px;
+      background-color: #fff !important;
+      color: #f84646;
+      border: 1px solid #f84646;
+      text-align: center;
+      font-weight: bold;
+    }
+    .color-hex-display {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #f84646;
+      margin-top: 0.25rem;
+      user-select: text;
+    }
+    .btn-elite {
+      background: linear-gradient(90deg, #f84646 0%, #6ce1e6 100%);
+      color: #fff;
+      font-weight: 500;
+      border-radius: 1rem;
+      border: none;
+      padding: 0.8rem 2.3rem;
+      width: 100%;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+    .btn-elite:hover {
+      background: linear-gradient(90deg, #6ce1e6 0%, #f84646 100%);
+    }
+    .error-message {
+      color: #f84646;
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container container-elite">
+    <div class="main-heading">Pantone 2026</div>
+    <div class="desc">
+      Welcome to the Pantone 2026 Color Prediction Challenge.<br />
+      Imagine and define the next color trend for the global stage.<br />
+      Choose a vibrant color from our interactive picker and share your
+      inspiration.<br />
+      Each response helps shape creative innovation for the future.<br />
+    </div>
+    <form id="pantone-form">
+      <div class="mb-3">
+        <label for="name">Name :</label>
+        <input type="text" class="form-control" id="name" required />
+      </div>
+      <div class="mb-3">
+        <label for="email">Email :</label>
+        <input type="email" class="form-control" id="email" required />
+        <div id="email-error" class="error-message"></div>
+      </div>
+      <div class="mb-3">
+        <label for="program">Program :</label>
+        <select class="form-select" id="program" required>
+          <option value="">Select</option>
+          <option value="M.Sc">M.Sc</option>
+          <option value="B.Sc">B.Sc</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="colorpicker">Selected Color :</label>
+        <div class="color-row">
+          <input type="color" id="color" value="#FFFFFF" required />
+          <input
+            type="text"
+            class="form-control"
+            id="colorhex"
+            value="#FFFFFF"
+            readonly
+          />
+        </div>
+        <div class="color-hex-display" id="color-hex-text">#FFFFFF</div>
+      </div>
+      <div class="mb-3">
+        <label for="reason"
+          >Reason <span style="color: #aaa; font-size: 0.95rem"
+            >(max 100 words)</span
+          >:</label
+        >
+        <textarea
+          class="form-control"
+          id="reason"
+          maxlength="700"
+          rows="3"
+          required
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-elite">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // Auto-fill hex value with color picker
+    const colorInput = document.getElementById("color");
+    const colorHexInput = document.getElementById("colorhex");
+    const colorHexText = document.getElementById("color-hex-text");
+
+    colorInput.addEventListener("input", function () {
+      colorHexInput.value = this.value.toUpperCase();
+      colorHexText.textContent = this.value.toUpperCase();
+    });
+
+    // Submit form and handle server response
+    document
+      .getElementById("pantone-form")
+      .addEventListener("submit", async function (event) {
+        event.preventDefault();
+        document.getElementById("email-error").textContent = "";
+
+        const email = document.getElementById("email").value.trim();
+        const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        if (!validEmail) {
+          document.getElementById("email-error").textContent =
+            "Please enter a valid email address.";
+          return;
+        }
+
+        const reason = document.getElementById("reason").value;
+        if ((reason.match(/\w+/g) || []).length > 100) {
+          document.getElementById("email-error").textContent =
+            "Reason must be max 100 words.";
+          return;
+        }
+
+        const data = {
+          name: document.getElementById("name").value.trim(),
+          email: email,
+          program: document.getElementById("program").value,
+          color: colorInput.value,
+          colorhex: colorHexInput.value,
+          reason: reason.trim(),
+          timestamp: new Date().toISOString(),
+        };
+
+        try {
+          const response = await fetch(
+            "https://script.google.com/macros/s/AKfycbzmoGXXavhe-sq55uWAFPL8YXaBY8BwR3s8PtLFsD_ve3ryb5_QWgZsM_Ua6d-uxQsQ/exec",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            }
+          );
+          const result = await response.json();
+          if (result.result === "error") {
+            document.getElementById("email-error").textContent = result.message;
+            return;
+          }
+          alert("Your response has been submitted!");
+          event.target.reset();
+          colorHexInput.value = "#FFFFFF";
+          colorInput.value = "#FFFFFF";
+          colorHexText.textContent = "#FFFFFF";
+        } catch (error) {
+          alert("Error submitting data. Please try again later.");
+          console.error(error);
+        }
+      });
+  </script>
+</body>
+</html>
